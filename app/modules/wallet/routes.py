@@ -109,9 +109,9 @@ def payment():
         return abort(400, form.errors), 400
 
 
-@wallet.route('/test', methods=["GET"])
+@wallet.route('/report', methods=["GET"])
 @jwt_required()
-def test():
+def report():
     user = Users.objects(phone_number=get_jwt_identity()).first()
     pipeline = [
         {
@@ -141,10 +141,6 @@ def test():
             }
         }
     ]
-    test = Wallets.objects().aggregate(pipeline)
-    data = []
-    print(list(test)[0])
-    # data.append(test.payment_history)
-    # data.append(test.top_up_history)
-    # data.append(test.transfer_history)
-    # print(data)
+    test = list(Wallets.objects().aggregate(pipeline))
+    data = test[0]["payment_history"] + test[0]["transfer_history"] + test[0]["top_up_history"]
+    return jsonify({"status": "success", "result":data})
