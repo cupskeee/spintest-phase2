@@ -1,0 +1,323 @@
+{
+	"info": {
+		"_postman_id": "fc2e1396-b1fa-4f9d-b770-217361352c37",
+		"name": "SPIN Test2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "first_name",
+							"value": "Muhammad Yusuf",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "Ramadhan",
+							"type": "text"
+						},
+						{
+							"key": "phone_number",
+							"value": "082124806130",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Ciawi",
+							"type": "text"
+						},
+						{
+							"key": "pin",
+							"value": "114045",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/auth/register",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "phone_number",
+							"value": "082124806130",
+							"type": "text"
+						},
+						{
+							"key": "pin",
+							"value": "114045",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/auth/login",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYyMTQ4NTE0NSwianRpIjoiZTViYjQ2ZmEtYWQxYS00ZTk5LTg0NjEtNDVhOWIzYjBkYzc4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjA4MjEyNDgwNjEzMCIsIm5iZiI6MTYyMTQ4NTE0NSwiZXhwIjoxNjIxOTE3MTQ1fQ.edUkefQWfYUORGaw1V-JnwiDAYn2qLsdvPniLsO6xtg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "first_name",
+							"value": "Muhammad Yusuf",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "Ramadhan",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Ciawi",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/auth/profile",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Top Up User Wallet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYyMTQ4NTE0NSwianRpIjoiZTViYjQ2ZmEtYWQxYS00ZTk5LTg0NjEtNDVhOWIzYjBkYzc4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjA4MjEyNDgwNjEzMCIsIm5iZiI6MTYyMTQ4NTE0NSwiZXhwIjoxNjIxOTE3MTQ1fQ.edUkefQWfYUORGaw1V-JnwiDAYn2qLsdvPniLsO6xtg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "amount",
+							"value": "100000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/wallet/topup",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wallet",
+						"topup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Online Payment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYyMTQ4NTE0NSwianRpIjoiZTViYjQ2ZmEtYWQxYS00ZTk5LTg0NjEtNDVhOWIzYjBkYzc4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjA4MjEyNDgwNjEzMCIsIm5iZiI6MTYyMTQ4NTE0NSwiZXhwIjoxNjIxOTE3MTQ1fQ.edUkefQWfYUORGaw1V-JnwiDAYn2qLsdvPniLsO6xtg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "amount",
+							"value": "50000",
+							"type": "text"
+						},
+						{
+							"key": "remarks",
+							"value": "Pulsa Telkomsel 50k",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/wallet/payment",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wallet",
+						"payment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transfer to User Wallet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYyMTQ4NTE0NSwianRpIjoiZTViYjQ2ZmEtYWQxYS00ZTk5LTg0NjEtNDVhOWIzYjBkYzc4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjA4MjEyNDgwNjEzMCIsIm5iZiI6MTYyMTQ4NTE0NSwiZXhwIjoxNjIxOTE3MTQ1fQ.edUkefQWfYUORGaw1V-JnwiDAYn2qLsdvPniLsO6xtg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "target_user",
+							"value": "eff55880-dfe7-460f-bead-23c8d946e675",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "30000",
+							"type": "text"
+						},
+						{
+							"key": "remarks",
+							"value": "Hadiah Ultah",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/wallet/transfer",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wallet",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wallet Transact Report",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYyMTQ4NDc1OSwianRpIjoiZGZkOTYzOTUtMGFlNS00YjQ5LWJkODAtMmYxYWYzYTQxMTYzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjA4MjEyNDgwNjEzMCIsIm5iZiI6MTYyMTQ4NDc1OSwiZXhwIjoxNjIxOTE2NzU5fQ.IqmfhESR0wkboFUskwca9jyfzVySXAtnal3FBL4NAks",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:5000/wallet/report",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"wallet",
+						"report"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
