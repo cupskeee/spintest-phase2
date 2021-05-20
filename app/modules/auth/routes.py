@@ -1,36 +1,65 @@
-import phonenumbers
-from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, validators, PasswordField
+import datetime
+import uuid
+
+from flask import Blueprint, request, abort, jsonify
+from flask_jwt_extended import create_access_token, create_refresh_token
+from mongoengine.errors import NotUniqueError
+
+from app.helpers import (
+    duplicate_phone
+)
+from app.models import (
+    Users,
+    Wallets
+)
+from .forms import *
+
+auth = Blueprint('auth', __name__, url_prefix='/auth')
 
 
-class Registration(FlaskForm):
-    class Meta:
-        csrf = False
-    first_name = StringField(u'First name', [validators.required(), validators.length(max=25)])
-    last_name = StringField(u'Last name', [validators.required(), validators.length(max=25)])
-    phone_number = StringField(u'Phone number', [validators.required(), validators.length(max=25)])
-    address = TextAreaField(u'Address', [validators.optional()])
-    pin = PasswordField(u'PIN', [validators.required(), validators.length(max=6)])
-
-    def validate_phone(self, phone_number):
+@auth.route('/register', methods=["POST"])
+def register():
+    # This is the register function
+    form = Registration(request.form)
+    result = {"status": "success", "msg": "User successfully registered, you can start logging in"}
+    if form.validate():
         try:
-            p = phonenumbers.parse(phone_number.data)
-            if not phonenumbers.is_valid_number(p):
-                raise ValueError()
-        except (phonenumbers.phonenumberutil.NumberParseException, ValueError):
-            raise validators.ValidationError('Invalid phone number')
+            user = {
+                "_id": str(uuid.uuid4()),
+                "first_name": form.first_name.data,
+                "last_name": form.last_name.data,
+                "address": form.address.data,
+                "phone_number": form.phone_number.data,
+                "pin": form.pin.data
+            }
+            user = Users(**user).save()
+            Wallets(_id=str(uuid.uuid4()), user=user).save()
+            result["result"] = user.serialize()
+        except NotUniqueError:
+            return duplicate_phone(), 400
+    else:
+        return abort(400, form.errors)
 
 
-class Login(FlaskForm):
-    class Meta:
-        csrf = False
-    phone_number = StringField(u'Phone number', [validators.required(), validators.length(max=25)])
-    pin = PasswordField(u'PIN', [validators.required(), validators.length(max=6)])
-
-    def validate_phone(self, phone_number):
-        try:
-            p = phonenumbers.parse(phone_number.data)
-            if not phonenumbers.is_valid_number(p):
-                raise ValueError()
-        except (phonenumbers.phonenumberutil.NumberParseException, ValueError):
-            raise validators.ValidationError('Invalid phone number')
+@auth.route('/login', methods=["POST"])
+def login():
+    # This is the login function
+    form = Login(request.form)
+    if form.validate():
+        user = Users.objects(phone_number=form.phone_number.data).first()
+        if user:
+            auth_success = user.check_pw_hash(form.pin.data)
+            if not auth_success:
+                return abort(401)
+            else:
+                expiry = datetime.timedelta(days=5)
+                access_token = create_access_token(identity=str(user.phone_number), expires_delta=expiry)
+                refresh_token = create_refresh_token(identity=str(user.phone_number))
+                return jsonify({'status': "success", "response": {'access_token': access_token,
+                                                                  'refresh_token': refresh_token,
+                                                                  'logged_in_as': "{} {}".format(user.first_name,
+                                                                                                 user.last_name)}})
+        else:
+            return abort(401)
+    else:
+        return abort(400, form.errors), 400
