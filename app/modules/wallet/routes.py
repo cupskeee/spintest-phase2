@@ -12,7 +12,8 @@ from app.models import (
     Wallets,
     TopUpHistory,
     TransferHistory,
-    PaymentHistory
+    PaymentHistory,
+    Tasks
 )
 from .forms import *
 
@@ -60,11 +61,11 @@ def transfer():
             return target_not_found()
         if wallet.balance < form.amount.data:
             return insufficient_balance()
-        # rq_job = current_app.task_queue.enqueue('app.modules.wallet.tasks.transfer',
-        #                                         **{"wallet": target_wallet, "amount": form.amount.data})
-        # Tasks(task_id=rq_job.get_id(), name='app.modules.wallet.tasks.transfer',
-        #       description="Transfer from {} to {}".format(user.phone_number, target_user.phone_number),
-        #       user=user).save()
+        rq_job = current_app.task_queue.enqueue('app.modules.wallet.tasks.transfer',
+                                                **{"wallet": target_wallet, "amount": form.amount.data})
+        Tasks(task_id=rq_job.get_id(), name='app.modules.wallet.tasks.transfer',
+              description="Transfer from {} to {}".format(user.phone_number, target_user.phone_number),
+              user=user).save()
         old_balance = wallet.balance
         new_balance = wallet.balance - form.amount.data
         wallet.update(balance=new_balance)

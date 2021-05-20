@@ -1,3 +1,6 @@
+# Redis Settings
+REDIS_URL = 'redis://'
+
 # App Settings
 APP_HOST = "0.0.0.0"
 APP_PORT = 5000

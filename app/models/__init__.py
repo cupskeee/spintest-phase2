@@ -1,4 +1,5 @@
 from mongoengine import CASCADE
+from .tasks import Tasks
 from .paymenthistory import PaymentHistory
 from .transferhistory import TransferHistory
 from .topuphistory import TopUpHistory
