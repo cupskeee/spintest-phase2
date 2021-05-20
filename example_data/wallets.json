@@ -1,0 +1,17 @@
+[{
+  "_id": "cc5fd6e0-bafa-4ffc-b7cf-f2424045570c",
+  "_cls": "Wallets",
+  "balance": 30000,
+  "user": "eff55880-dfe7-460f-bead-23c8d946e675",
+  "created_date": {
+    "$date": "2021-05-20T11:24:58.095Z"
+  }
+},{
+  "_id": "9d902d91-6758-4b27-a5cf-045a61d3f219",
+  "_cls": "Wallets",
+  "balance": 20000,
+  "user": "6a250211-f24d-4aa7-a502-5cf3696a0f1c",
+  "created_date": {
+    "$date": "2021-05-20T11:24:58.095Z"
+  }
+}]

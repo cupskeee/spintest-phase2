@@ -1,0 +1,11 @@
+[{
+  "_id": "e6383ac6-d2de-4f32-9613-cd6742bf1812",
+  "_cls": "TopUpHistory",
+  "created_date": {
+    "$date": "2021-05-20T11:32:21Z"
+  },
+  "amount": 100000,
+  "wallet": "9d902d91-6758-4b27-a5cf-045a61d3f219",
+  "balance_before": 0,
+  "balance_after": 100000
+}]

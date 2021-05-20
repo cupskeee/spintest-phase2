@@ -1,0 +1,13 @@
+[{
+  "_id": "5cc109d8-2235-4a6c-9478-8a3ef39d4635",
+  "_cls": "TransferHistory",
+  "created_date": {
+    "$date": "2021-05-20T11:32:20.995Z"
+  },
+  "amount": 30000,
+  "wallet": "9d902d91-6758-4b27-a5cf-045a61d3f219",
+  "target": "cc5fd6e0-bafa-4ffc-b7cf-f2424045570c",
+  "balance_before": 50000,
+  "balance_after": 20000,
+  "remarks": "Hadiah Ultah"
+}]

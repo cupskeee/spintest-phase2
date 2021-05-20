@@ -1,0 +1,23 @@
+[{
+  "_id": "eff55880-dfe7-460f-bead-23c8d946e675",
+  "_cls": "Users",
+  "first_name": "Lola Nur",
+  "last_name": "Hanifa",
+  "phone_number": "088219710113",
+  "address": "Ciawi",
+  "pin": "$2b$12$U5RBPGSk4olMtfBFdFK2AO5W3kcoypv1rmGreg2jz3nozRIrYcQpS",
+  "created_date": {
+    "$date": "2021-05-20T11:24:58.122Z"
+  }
+},{
+  "_id": "6a250211-f24d-4aa7-a502-5cf3696a0f1c",
+  "_cls": "Users",
+  "first_name": "Muhammad Yusuf",
+  "last_name": "Ramadhan",
+  "phone_number": "082124806130",
+  "address": "Ciawi",
+  "pin": "$2b$12$ol9U5bzwImekaPCk6fZ2O.Son93tE5ZX/3KAA/fO9pHB7H/rjnzeW",
+  "created_date": {
+    "$date": "2021-05-20T11:24:58.122Z"
+  }
+}]

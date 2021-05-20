@@ -1,0 +1,11 @@
+[{
+  "_id": "24dd51f8-24d0-4b5b-ab3b-e9e978363d51",
+  "_cls": "Tasks",
+  "name": "app.modules.wallet.tasks.transfer",
+  "description": "Transfer from 082124806130 to 088219710113",
+  "user": "6a250211-f24d-4aa7-a502-5cf3696a0f1c",
+  "complete": true,
+  "created_date": {
+    "$date": "2021-05-20T11:32:20.984Z"
+  }
+}]
