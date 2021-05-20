@@ -7,5 +7,5 @@ from .extensions import (
 
 app = Flask(__name__)
 app.config.from_object('config')
-db.init_app()
+db.init_app(app)
 jwt.init_app(app)

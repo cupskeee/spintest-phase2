@@ -34,3 +34,11 @@ class Login(FlaskForm):
                 raise ValueError()
         except (phonenumbers.phonenumberutil.NumberParseException, ValueError):
             raise validators.ValidationError('Invalid phone number')
+
+
+class Update(FlaskForm):
+    class Meta:
+        csrf = False
+    first_name = StringField(u'First name', [validators.optional(), validators.length(max=25)])
+    last_name = StringField(u'Last name', [validators.optional(), validators.length(max=25)])
+    address = TextAreaField(u'Address', [validators.optional()])

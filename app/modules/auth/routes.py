@@ -2,7 +2,7 @@ import datetime
 import uuid
 
 from flask import Blueprint, request, abort, jsonify
-from flask_jwt_extended import create_access_token, create_refresh_token
+from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity
 from mongoengine.errors import NotUniqueError
 
 from app.helpers import (
@@ -37,6 +37,7 @@ def register():
             result["result"] = user.serialize()
         except NotUniqueError:
             return duplicate_phone(), 400
+        return jsonify(result)
     else:
         return abort(400, form.errors)
 
@@ -61,5 +62,27 @@ def login():
                                                                                                  user.last_name)}})
         else:
             return abort(401)
+    else:
+        return abort(400, form.errors), 400
+
+
+@auth.route('/profile', methods=["PUT"])
+@jwt_required()
+def updateProfile():
+    # This is the update profile function
+    form = Update(request.form)
+    if form.validate():
+        user = Users.objects(phone_number=get_jwt_identity()).first()
+        if user:
+            data = {
+                "first_name": form.first_name.data,
+                "last_name": form.last_name.data,
+                "address": form.address.data
+            }
+            user = user.update(**data)
+            user = {**user.serialize(), **data}
+            return jsonify({"status": "success", "result": user})
+        else:
+            return abort(400), 400
     else:
         return abort(400, form.errors), 400
